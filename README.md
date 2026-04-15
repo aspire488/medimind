@@ -1,4 +1,8 @@
-# MediMind Care
+⚠️ MediMind is currently a prototype healthcare assistant built for concept demonstration. Some features are experimental and may not function fully. This project is intended for research and educational purposes only and should not be used for real medical decisions.
+
+🚀 Live Demo: https://medimind-seven.vercel.app
+
+# MediMind — AI-Powered Medication Reminder & Health Assistant# MediMind Care
 
 > AI-powered medicine reminder and health assistant application
 
