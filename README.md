@@ -1,4 +1,30 @@
-⚠️ MediMind is currently a prototype healthcare assistant built for concept demonstration. Some features are experimental and may not function fully. This project is intended for research and educational purposes only and should not be used for real medical decisions.
+<p align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=180&section=header&text=MediMind&fontSize=42&fontColor=ffffff&desc=AI%20Powered%20Health%20Assistant&descAlignY=60"/>
+
+</p>
+
+<p align="center">
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green)](https://medimind-seven.vercel.app/)
+![Repo Size](https://img.shields.io/github/repo-size/aspire488/medimind)
+![Last Commit](https://img.shields.io/github/last-commit/aspire488/medimind)
+![Issues](https://img.shields.io/github/issues/aspire488/medimind)
+![Stars](https://img.shields.io/github/stars/aspire488/medimind)
+![Forks](https://img.shields.io/github/forks/aspire488/medimind)
+
+</p>
+
+<p align="center">
+
+<strong>MediMind is an AI-powered medicine reminder and health assistant designed to help users track medication schedules, receive intelligent reminders, and interact with a smart health assistant.</strong>
+
+</p>
+
+---
+
+⚠️ **MediMind is currently a prototype under active development.**  
+Some modules are experimental and may not function fully.⚠️ MediMind is currently a prototype healthcare assistant built for concept demonstration. Some features are experimental and may not function fully. This project is intended for research and educational purposes only and should not be used for real medical decisions.
 
 🚀 Live Demo: https://medimind-seven.vercel.app
 
@@ -252,3 +278,53 @@ The prototype uses `localStorage` via `DataService.js`. All data access goes thr
 - Demo data is seeded automatically on first launch by `seedData.js`
 - The app is mobile-first (max-width 430px shell) but works in any browser
 - All screens are fully functional offline (reminders, medicines, adherence) — only AI chat requires network when in live mode
+
+- ---
+
+## 📊 Project Analytics
+
+<p align="center">
+
+<img src="https://github-readme-stats.vercel.app/api/pin/?username=aspire488&repo=medimind&theme=tokyonight&hide_border=true"/>
+
+</p>
+
+### Repository Activity
+
+<p align="center">
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=aspire488&repo=medimind&theme=tokyo-night&hide_border=true"/>
+
+</p>
+
+### Development Progress
+
+| Module | Completion |
+|------|-------------|
+| Core UI | ██████████ 100% |
+| Medicine Reminder System | █████████░ 90% |
+| Health Tracking Dashboard | ████████░░ 80% |
+| AI Assistant Integration | ███████░░░ 70% |
+| NLP Normalization (Manglish/Malayalam) | ███████░░░ 70% |
+| Smart Reminder Logic | ██████░░░░ 60% |
+| Hardware Dispenser Concept | █████░░░░░ 50% |
+
+---
+
+## 🌟 Support the Project
+
+If you find MediMind useful, consider giving the repository a **star** ⭐ on GitHub.
+
+---
+
+<p align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:2c5364,100:0f2027&height=120&section=footer"/>
+
+</p>
+
+<p align="center">
+
+Exploring AI-powered healthcare assistance through experimentation and prototypes.
+
+</p>
