@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+<title id="title">MediMind Care architecture</title><desc id="desc">MediMind Care separates React UI, application state, deterministic reminder logic, local data and an optional AI layer.</desc>
+<rect width="1200" height="500" rx="28" fill="#0f2027"/>
+<text x="60" y="62" fill="#fff" font-family="Arial,sans-serif" font-size="30" font-weight="700">MediMind Care — prototype architecture</text>
+<text x="60" y="94" fill="#b9c7cc" font-family="Arial,sans-serif" font-size="16">Application state remains the source of truth; AI is an optional assistant behind a bounded context boundary.</text>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<rect x="80" y="145" width="300" height="105" rx="18" fill="#162a32" stroke="#61dafb" stroke-width="2"/><text x="230" y="184" fill="#fff" font-size="21" font-weight="700">React UI</text><text x="230" y="214" fill="#b9c7cc" font-size="14">Senior · Patient · Caregiver</text>
+<rect x="450" y="145" width="300" height="105" rx="18" fill="#162a32" stroke="#61dafb" stroke-width="2"/><text x="600" y="184" fill="#fff" font-size="21" font-weight="700">Application State</text><text x="600" y="214" fill="#b9c7cc" font-size="14">Auth · Medicines · Alerts · Conversation</text>
+<rect x="820" y="145" width="300" height="105" rx="18" fill="#162a32" stroke="#61dafb" stroke-width="2"/><text x="970" y="184" fill="#fff" font-size="21" font-weight="700">Data Service</text><text x="970" y="214" fill="#b9c7cc" font-size="14">Local persistence abstraction</text>
+<rect x="230" y="320" width="300" height="105" rx="18" fill="#162a32" stroke="#8be9fd" stroke-width="2"/><text x="380" y="359" fill="#fff" font-size="21" font-weight="700">Reminder Engine</text><text x="380" y="389" fill="#b9c7cc" font-size="14">Deterministic schedule checks</text>
+<rect x="670" y="320" width="300" height="105" rx="18" fill="#162a32" stroke="#8be9fd" stroke-width="2"/><text x="820" y="359" fill="#fff" font-size="21" font-weight="700">AI Boundary</text><text x="820" y="389" fill="#b9c7cc" font-size="14">Local intents · cache · optional Gemini</text>
+</g>
+<g stroke="#61dafb" stroke-width="3" fill="none"><path d="M380 197h70"/><path d="M750 197h70"/><path d="M600 250v70H380"/><path d="M600 250v70h220"/></g>
+<g fill="#61dafb"><path d="M450 197l-10-7v14z"/><path d="M820 197l-10-7v14z"/><path d="M380 320l-10-7v14z"/><path d="M820 320l-10-7v14z"/></g>
+<rect x="120" y="450" width="960" height="1" fill="#35515a"/>
+<text x="600" y="478" fill="#9fb2b8" font-family="Arial,sans-serif" font-size="14" text-anchor="middle">Prototype boundary: synthetic/demo data only • not a medical device • no diagnosis or treatment decisions</text>
+</svg>
