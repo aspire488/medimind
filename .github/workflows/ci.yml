@@ -21,5 +21,9 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Build production bundle
+      - name: Production build
         run: npm run build
+      - name: Install Chromium for browser tests
+        run: npx --yes playwright@1.55.0 install --with-deps chromium
+      - name: Browser regression smoke suite
+        run: npm run test:e2e
