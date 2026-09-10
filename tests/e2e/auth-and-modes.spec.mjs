@@ -1,10 +1,15 @@
 import { test, expect } from '@playwright/test';
 
 async function openLogin(page) {
+  await page.goto('/login');
+  await expect(page.getByText('Enter your PIN')).toBeVisible();
+}
+
+test('application boots into the login flow', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveURL(/\/login$/);
   await expect(page.getByText('Enter your PIN')).toBeVisible();
-}
+});
 
 test('standard patient can enter the demo dashboard', async ({ page }) => {
   await openLogin(page);
