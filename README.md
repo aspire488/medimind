@@ -1,5 +1,5 @@
 <p align="center">
-<img src="docs/medimind-architecture.svg" alt="MediMind Care architecture" width="100%"/>
+<img src="https://raw.githubusercontent.com/aspire488/medimind/main/docs/medimind-architecture.svg" alt="MediMind Care architecture" width="100%"/>
 </p>
 
 <p align="center">
@@ -11,140 +11,45 @@
 
 # MediMind Care
 
-**AI-assisted medication-reminder and health-workflow prototype.**
+MediMind Care is an AI-assisted medication-reminder and health-workflow prototype exploring role-specific UX, deterministic reminders, accessibility, and bounded AI assistance.
 
-MediMind explores how one interface can adapt to different users while keeping application state and deterministic workflows separate from an optional AI assistant.
+## 🚀 Live Demo
 
-> ⚠️ **Healthcare prototype:** MediMind is for research and education. It is **not a medical device** and must not be used for diagnosis, treatment decisions, emergency response, or medication decisions. Use synthetic/demo data only.
+https://medimind-seven.vercel.app/
 
-## What it demonstrates
+## ⚠️ Prototype boundary
 
-- **Senior mode** — large controls, simplified navigation, voice reminders and SOS access.
-- **Patient mode** — medication schedules, adherence information and AI assistance.
-- **Caregiver mode** — multi-patient cards, alerts and adherence views.
-- **Deterministic reminders** — schedule checking stays outside the model.
-- **AI boundary** — bounded context, local intent handling and optional Gemini integration.
-- **Local persistence** — application storage is abstracted behind a data service.
+This is a research/education prototype, not a medical device. It does not provide diagnosis, treatment decisions, or emergency guidance. Use synthetic/demo data only. AI output is untrusted and must be validated.
 
-## Architecture
+## 👥 Modes
 
-The repository keeps the AI layer away from direct storage access. Common requests can be handled locally, while optional model calls receive bounded application context.
+- **Senior** — simplified controls and medication reminders
+- **Patient** — medication tracking and assistant interaction
+- **Caregiver** — synthetic alerts and overview workflows
 
-```text
-React UI
-   ↓
-Application State
-   ├── Data Service → local persistence
-   ├── Reminder Engine → deterministic checks
-   └── AI Boundary
-         ├── local intents
-         ├── response cache
-         ├── context builder
-         └── optional Gemini
-```
+## 🏗 Architecture
 
-## Core features
+React UI → application state → deterministic reminder engine → local data service
 
-| Area | Prototype capability |
-|---|---|
-| Medication | schedules, intake logging, missed-dose state |
-| Reminders | periodic schedule checks and alerts |
-| Adherence | history, streaks and weekly visualization |
-| AI assistant | Gemini path with local fallback/cache |
-| Voice | browser speech recognition + text-to-speech |
-| Accessibility | senior-oriented controls and typography |
-| Caregiver | patient cards, alerts and detail views |
-| Storage | localStorage behind `DataService` |
-| Hardware concept | simulated dispenser view |
-| Language | English + Malayalam preference paths |
+Optional AI is isolated behind a bounded context boundary and is not the source of truth for reminder state.
 
-## Quick start
+## 🧪 Development
 
 ```bash
-npm ci
+npm install
 npm run dev
-```
-
-Open the local Vite URL shown in the terminal.
-
-### Demo accounts
-
-| User | PIN | Mode |
-|---|---:|---|
-| Arjun Nair | `1234` | Standard patient |
-| Leela Menon | `0000` | Senior citizen |
-| Priya Nair | `9999` | Caregiver |
-
-These are demo credentials for the prototype. Do not use real credentials.
-
-## AI configuration
-
-Development should use the local/mock path by default.
-
-```bash
-cp .env.example .env.development
-```
-
-For live Gemini experimentation, configure the Vite environment variables locally. **Never commit an API key or real medical data.**
-
-## Validation
-
-```bash
-npm ci
 npm run build
 ```
 
-GitHub Actions validates the production build on pushes and pull requests to `main`.
+For local AI configuration, copy `.env.example` to `.env` and never commit credentials.
 
-## Repository structure
+## 🔭 Roadmap
 
-```text
-src/
-├── components/       # reusable UI components
-├── contexts/         # application state
-├── hooks/            # React integration hooks
-├── screens/          # role-specific and shared screens
-├── services/         # storage, reminders and AI services
-└── utils/            # helpers and demo seed data
+- Browser-level regression coverage with Playwright
+- Stronger persistence abstraction
+- More accessibility testing
+- Clearer AI/mock boundaries
 
-docs/                 # architecture documentation
-.github/              # CI workflow
-```
+## 📄 License
 
-## Design principles
-
-1. **AI is an assistant, not the source of truth.**
-2. **Application state stays outside the model.**
-3. **Deterministic intents should not require an API call.**
-4. **Clinical claims must never be presented as authoritative medical advice.**
-5. **Accessibility should not depend on color alone.**
-6. **Persistence should be replaceable without rewriting the UI.**
-
-## Roadmap
-
-- [x] Three role-oriented interfaces
-- [x] Medication/reminder state model
-- [x] Local fallback and response cache
-- [x] Gemini integration path
-- [x] Accessibility-focused senior mode
-- [x] Production build validation in CI
-- [x] Safe environment template
-- [ ] Browser-level regression suite
-- [ ] Stronger reminder/adherence unit coverage
-- [ ] Explicit backend/privacy architecture before real user data
-- [ ] Formal threat model
-
-## Contributing & security
-
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`SECURITY.md`](SECURITY.md). Keep changes focused, use synthetic data, and preserve the healthcare prototype boundary.
-
-## Links
-
-- **[Live demo](https://medimind-seven.vercel.app/)**
-- **[Repository](https://github.com/aspire488/medimind)**
-
-## License
-
-See [`LICENSE`](LICENSE).
-
-<p align="center"><sub>Built as a healthcare UX, systems, and AI-boundary prototype — not for clinical use.</sub></p>
+Prototype code published for educational and engineering experimentation.
