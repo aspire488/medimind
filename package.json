@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test:e2e": "npx --yes @playwright/test@1.55.0 test"
+    "test:e2e": "npx --yes @playwright/test@1.57.0 test"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
