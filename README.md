@@ -1,36 +1,24 @@
-<p align="center">
-<img src="https://raw.githubusercontent.com/aspire488/medimind/main/docs/medimind-architecture.svg" alt="MediMind Care architecture" width="100%"/>
-</p>
-
-<p align="center">
-<a href="https://medimind-seven.vercel.app/"><img src="https://img.shields.io/badge/Live%20Demo-Open-2ea44f?style=for-the-badge" alt="Live demo"/></a>
-<img src="https://img.shields.io/badge/Status-Prototype-orange?style=for-the-badge" alt="Prototype"/>
-<img src="https://img.shields.io/badge/React-18-61dafb?style=for-the-badge&logo=react&logoColor=white" alt="React 18"/>
-<img src="https://img.shields.io/badge/Vite-6-646cff?style=for-the-badge&logo=vite&logoColor=white" alt="Vite"/>
-<img src="https://img.shields.io/github/license/aspire488/medimind?style=for-the-badge" alt="License"/>
-</p>
-
 # MediMind Care
 
-**MediMind Care is an AI-assisted health-workflow prototype focused on role-specific UX, deterministic medication reminders, accessibility, and explicit AI safety boundaries.**
+**MediMind Care is an AI-assisted medication-reminder and health-workflow prototype** focused on role-specific UX, deterministic reminder state, accessibility, synthetic data, and explicit boundaries around untrusted AI assistance.
 
-## 🚀 Live prototype
-
-**Try it:** https://medimind-seven.vercel.app/
-
-The live deployment is an educational/research prototype using synthetic/demo data.
+> **Project status:** MediMind is now treated as a completed/frozen prototype. The repository has been hardened for public inspection and reproducibility; clinical or production-health development is explicitly out of scope.
 
 ## ⚠️ Safety boundary
 
-> **MediMind is not a medical device and is not clinical software.** It does not provide diagnosis, treatment decisions, or emergency guidance.
+> **MediMind is not a medical device and is not clinical software.**
 
-The engineering goal is to demonstrate how AI can assist around a deterministic workflow without becoming the source of truth for safety-critical state.
+It must not be presented as providing diagnosis, treatment decisions, emergency guidance, or clinical authority.
 
-- Synthetic/demo data only
-- No real patient records or credentials
-- AI output is untrusted and must be validated
-- Reminder/workflow state remains deterministic
-- Production clinical use is explicitly out of scope
+The prototype uses synthetic/demo data only.
+
+- no real patient records
+- no real credentials
+- AI output is untrusted
+- reminder/workflow state remains deterministic
+- clinical use is explicitly out of scope
+
+These constraints are part of the engineering design, not optional documentation.
 
 ## 👥 User modes
 
@@ -41,49 +29,48 @@ The engineering goal is to demonstrate how AI can assist around a deterministic 
 ## 🏗️ Architecture
 
 ```text
-┌─────────────────────────────────────┐
-│              React UI               │
-│ senior · patient · caregiver views  │
-└──────────────────┬──────────────────┘
-                   ↓
-┌─────────────────────────────────────┐
-│          Application State           │
-│ roles · sessions · workflow state   │
-└──────────────────┬──────────────────┘
-                   ↓
-┌─────────────────────────────────────┐
-│     Deterministic Reminder Layer    │
-│ schedules · reminders · local rules │
-└──────────────────┬──────────────────┘
-                   ↓
-┌─────────────────────────────────────┐
-│          Local Data Layer            │
-│ demo persistence / application data │
-└─────────────────────────────────────┘
+React UI
+   ↓
+Application State
+   ↓
+Deterministic Reminder Layer
+   ↓
+Local / Demo Data
 
-        ┌─────────────────────────┐
-        │ Optional AI assistance  │
-        │ bounded + non-authority │
-        └─────────────────────────┘
+Optional AI assistance remains bounded and non-authoritative.
 ```
 
-See [`docs/medimind-architecture.svg`](docs/medimind-architecture.svg) for the visual architecture.
+See [`docs/medimind-architecture.svg`](docs/medimind-architecture.svg).
 
-## 🧪 Engineering status
+## 🧪 Final engineering baseline
 
-Current public baseline:
+- Node 22 development/CI baseline
+- deterministic production-build validation
+- Playwright browser regression smoke suite in CI
+- Chromium installation in CI for browser validation
+- CodeQL JavaScript analysis
+- Dependabot dependency monitoring
+- explicit environment/credential hygiene
+- synthetic-data safety boundary
+- deterministic workflow state
+- architecture and contribution documentation
+- deployment security headers
+- MIT licensing
 
-- Node 22 production-build CI
-- Explicit environment/credential hygiene
-- Prototype-specific security guidance
-- Deterministic reminder architecture
-- Synthetic-data boundary
-- Architecture documentation
-- Browser regression smoke coverage is part of CI
+The prototype intentionally retains its React 18/Vite 6 application stack rather than introducing an unvalidated framework migration.
 
-## 🤝 Contributing
+## 🔐 Security posture
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development, testing, safety, and pull request guidelines.
+The deployment includes defensive HTTP headers:
+- `Strict-Transport-Security`
+- `X-Content-Type-Options`
+- `X-Frame-Options`
+- `Referrer-Policy`
+- restrictive `Permissions-Policy`
+
+Never commit API keys, private health information, patient records, session data, or other secrets.
+
+See [`SECURITY.md`](SECURITY.md).
 
 ## 🛠️ Development
 
@@ -91,26 +78,30 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development, testing, safety, and pul
 npm install
 npm run dev
 npm run build
+npm run test:e2e
 ```
 
-For local AI configuration, copy `.env.example` to `.env` and never commit credentials.
+For local AI configuration, copy `.env.example` to `.env`. The resulting `.env` must never be committed.
 
-CI validates the production build on Node 22 with locked dependency installation. Dependabot monitors npm and GitHub Actions dependencies weekly.
+## 🧪 Browser validation
 
-## 🔭 Roadmap
+The Playwright smoke suite runs against the production preview server.
 
-- [x] Browser-level regression coverage with Playwright
-- [ ] Stronger persistence abstraction
-- [ ] More accessibility testing
-- [ ] Clearer AI/mock boundaries
-- [ ] More synthetic workflow fixtures
+```bash
+npm run build
+npm run test:e2e
+```
 
-## 📌 Related engineering work
+The CI environment installs Chromium and runs the browser regression suite automatically.
 
-- [Issue #2 — Browser-level regression coverage](https://github.com/aspire488/medimind/issues/2)
-- [PR #1 — Public-development hardening](https://github.com/aspire488/medimind/pull/1)
-- [PR #3 — Safety and testing contract](https://github.com/aspire488/medimind/pull/3)
+## 🤝 Contributing
 
-## 📄 License
+Maintenance contributions are welcome when they improve correctness, accessibility, security, reproducibility, documentation, or dependency hygiene while preserving the safety boundary.
 
-Prototype code published for educational and engineering experimentation.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## 📜 License
+
+MediMind Care is released under the **MIT License**. See [`LICENSE`](LICENSE).
+
+The MIT License is the OSI-approved license identified by SPDX as `MIT`. citeturn0search3
