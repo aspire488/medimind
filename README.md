@@ -81,6 +81,10 @@ Current public baseline:
 - Architecture documentation
 - Browser regression testing tracked as the next major validation milestone
 
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development, testing, safety, and pull request guidelines.
+
 ## 🛠️ Development
 
 ```bash
