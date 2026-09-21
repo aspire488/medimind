@@ -4,6 +4,12 @@
 
 > **Project status:** MediMind is now treated as a completed/frozen prototype. The repository has been hardened for public inspection and reproducibility; clinical or production-health development is explicitly out of scope.
 
+## 🚀 Live Demo
+
+**Try the prototype:** https://medimind-seven.vercel.app/
+
+The hosted deployment is a prototype/demo environment only. Do not enter real patient information or credentials.
+
 ## ⚠️ Safety boundary
 
 > **MediMind is not a medical device and is not clinical software.**
@@ -27,6 +33,8 @@ These constraints are part of the engineering design, not optional documentation
 - **Caregiver** — synthetic alerts and overview workflows
 
 ## 🏗️ Architecture
+
+![MediMind Care architecture](docs/medimind-architecture.svg)
 
 ```text
 React UI
