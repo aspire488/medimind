@@ -73,13 +73,13 @@ See [`docs/medimind-architecture.svg`](docs/medimind-architecture.svg) for the v
 
 Current public baseline:
 
-- Node 20 production-build CI
+- Node 22 production-build CI
 - Explicit environment/credential hygiene
 - Prototype-specific security guidance
 - Deterministic reminder architecture
 - Synthetic-data boundary
 - Architecture documentation
-- Browser regression testing tracked as the next major validation milestone
+- Browser regression smoke coverage is part of CI
 
 ## 🤝 Contributing
 
@@ -95,11 +95,11 @@ npm run build
 
 For local AI configuration, copy `.env.example` to `.env` and never commit credentials.
 
-CI validates the production build on Node 20. Dependabot monitors npm and GitHub Actions dependencies weekly.
+CI validates the production build on Node 22 with locked dependency installation. Dependabot monitors npm and GitHub Actions dependencies weekly.
 
 ## 🔭 Roadmap
 
-- [ ] Browser-level regression coverage with Playwright
+- [x] Browser-level regression coverage with Playwright
 - [ ] Stronger persistence abstraction
 - [ ] More accessibility testing
 - [ ] Clearer AI/mock boundaries
