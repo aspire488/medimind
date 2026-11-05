@@ -1,38 +1,44 @@
-# MediMind Care
+<p align="center"><img src="assets/brand/readme-hero.svg" width="100%" alt="MediMind Care — Reminders, roles and reliable workflow state."/></p>
 
-**MediMind Care is an AI-assisted medication-reminder and health-workflow prototype** focused on role-specific UX, deterministic reminder state, accessibility, synthetic data, and explicit boundaries around untrusted AI assistance.
+<p align="center">
+  <a href="https://medimind-seven.vercel.app/"><strong>OPEN LIVE PROTOTYPE ↗</strong></a>
+  &nbsp;·&nbsp;
+  <a href="docs/medimind-architecture.svg">ARCHITECTURE</a>
+  &nbsp;·&nbsp;
+  <a href="SECURITY.md">SECURITY</a>
+  &nbsp;·&nbsp;
+  <a href="CONTRIBUTING.md">CONTRIBUTING</a>
+</p>
 
-> **Project status:** MediMind is now treated as a completed/frozen prototype. The repository has been hardened for public inspection and reproducibility; clinical or production-health development is explicitly out of scope.
+<p align="center">
+  <img src="https://img.shields.io/badge/STATUS-FROZEN%20PROTOTYPE-315b4b?style=flat-square" alt="Frozen prototype"/>
+  <img src="https://img.shields.io/badge/STACK-REACT%20%2F%20VITE-315b4b?style=flat-square" alt="React and Vite"/>
+  <img src="https://img.shields.io/badge/LICENSE-MIT-315b4b?style=flat-square" alt="MIT license"/>
+</p>
 
-## 🚀 Live Demo
+# A calmer interface for care workflows.
 
-**Try the prototype:** https://medimind-seven.vercel.app/
+MediMind Care is an **AI-assisted medication-reminder and health-workflow prototype** built around role-specific experiences, deterministic reminder state, accessible interactions, synthetic data, and strict boundaries around untrusted AI assistance.
 
-The hosted deployment is a prototype/demo environment only. Do not enter real patient information or credentials.
+> **Project status — completed and frozen.** This repository is a hardened, reproducible prototype for public inspection. Clinical or production-health use is explicitly out of scope.
 
-## ⚠️ Safety boundary
+## At a glance
 
-> **MediMind is not a medical device and is not clinical software.**
+| | |
+|---|---|
+| **Experience** | Senior, patient, and caregiver modes |
+| **Core principle** | Reminder and workflow state stays deterministic |
+| **Data** | Synthetic/demo data only |
+| **AI boundary** | Optional assistance; never authoritative |
+| **Deployment** | [medimind-seven.vercel.app](https://medimind-seven.vercel.app/) |
 
-It must not be presented as providing diagnosis, treatment decisions, emergency guidance, or clinical authority.
+## The experience
 
-The prototype uses synthetic/demo data only.
+- **Senior** — simplified controls and medication reminders.
+- **Patient** — medication tracking and assistant interaction.
+- **Caregiver** — synthetic alerts and overview workflows.
 
-- no real patient records
-- no real credentials
-- AI output is untrusted
-- reminder/workflow state remains deterministic
-- clinical use is explicitly out of scope
-
-These constraints are part of the engineering design, not optional documentation.
-
-## 👥 User modes
-
-- **Senior** — simplified controls and medication reminders
-- **Patient** — medication tracking and assistant interaction
-- **Caregiver** — synthetic alerts and overview workflows
-
-## 🏗️ Architecture
+## System design
 
 ![MediMind Care architecture](docs/medimind-architecture.svg)
 
@@ -48,39 +54,30 @@ Local / Demo Data
 Optional AI assistance remains bounded and non-authoritative.
 ```
 
-See [`docs/medimind-architecture.svg`](docs/medimind-architecture.svg).
+## Engineering baseline
 
-## 🧪 Final engineering baseline
-
-- Node 22 development/CI baseline
-- deterministic production-build validation
-- Playwright browser regression smoke suite in CI
+- Node 22 development and CI baseline
+- Deterministic production-build validation
+- Playwright browser regression smoke suite
 - Chromium installation in CI for browser validation
-- CodeQL JavaScript analysis
-- Dependabot dependency monitoring
-- explicit environment/credential hygiene
-- synthetic-data safety boundary
-- deterministic workflow state
-- architecture and contribution documentation
-- deployment security headers
-- MIT licensing
+- CodeQL JavaScript analysis and Dependabot monitoring
+- Explicit environment and credential hygiene
+- Deployment security headers
+- React 18 / Vite 6 application stack
 
-The prototype intentionally retains its React 18/Vite 6 application stack rather than introducing an unvalidated framework migration.
+## Safety is an architectural constraint
 
-## 🔐 Security posture
+**MediMind is not a medical device and is not clinical software.** It does not provide diagnosis, treatment decisions, emergency guidance, or clinical authority.
 
-The deployment includes defensive HTTP headers:
-- `Strict-Transport-Security`
-- `X-Content-Type-Options`
-- `X-Frame-Options`
-- `Referrer-Policy`
-- restrictive `Permissions-Policy`
+- No real patient records or credentials.
+- Synthetic/demo data only.
+- AI output is untrusted.
+- Reminder and workflow state remains deterministic.
+- Clinical use is explicitly out of scope.
 
-Never commit API keys, private health information, patient records, session data, or other secrets.
+These constraints are part of the engineering design, not optional documentation. The hosted demo is for prototype inspection only; do not enter real patient information or credentials.
 
-See [`SECURITY.md`](SECURITY.md).
-
-## 🛠️ Development
+## Run locally
 
 ```bash
 npm install
@@ -89,27 +86,20 @@ npm run build
 npm run test:e2e
 ```
 
-For local AI configuration, copy `.env.example` to `.env`. The resulting `.env` must never be committed.
+For local AI configuration, copy `.env.example` to `.env`. Never commit the resulting file.
 
-## 🧪 Browser validation
+## Security
 
-The Playwright smoke suite runs against the production preview server.
+The deployment includes defensive HTTP headers: HSTS, content-type protection, frame protection, referrer policy, and a restrictive Permissions Policy.
 
-```bash
-npm run build
-npm run test:e2e
-```
+See [SECURITY.md](SECURITY.md). Never commit API keys, private health information, patient records, session data, or other secrets.
 
-The CI environment installs Chromium and runs the browser regression suite automatically.
-
-## 🤝 Contributing
+## Contributing
 
 Maintenance contributions are welcome when they improve correctness, accessibility, security, reproducibility, documentation, or dependency hygiene while preserving the safety boundary.
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## 📜 License
+## License
 
-MediMind Care is released under the **MIT License**. See [`LICENSE`](LICENSE).
-
-The MIT License is the OSI-approved license identified by SPDX as `MIT`.
+MIT — see [LICENSE](LICENSE).
