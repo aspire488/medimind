@@ -61,7 +61,7 @@ export async function routeAI(message, ctx, options = {}) {
     }
 
     if (intent === 'adherence') {
-      const enriched = `${ctx?.summary || ''}\\n\\nQuestion: ${input}`;
+      const enriched = `${ctx?.summary || ''}\n\nQuestion: ${input}`;
       const res = await callClaude(enriched, { maxTokens: 220 });
       routeAI._cache.set(cacheKey, res.text);
       return res;
