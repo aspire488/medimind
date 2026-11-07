@@ -1,63 +1,20 @@
-// ═══════════════════════════════════════════════════
-// AIProviderRouter — multi-provider Mindie backbone
-// Routes queries to: Gemini, GPT, Claude, or local rules.
-//  - Medicine knowledge  → Gemini
-//  - Conversation / mood → GPT
-//  - Adherence reasoning → Claude
-//  - Offline             → local fallback
-// ═══════════════════════════════════════════════════
+// AIProviderRouter — browser-safe provider boundary.
+//
+// Direct calls to OpenAI and Anthropic from the browser would expose API
+// credentials in the built assets. These integrations remain deliberately
+// unavailable until authenticated, rate-limited server-side endpoints exist.
+// routeAI catches these errors and uses the deterministic local fallback.
 
 import { getGeminiService }   from './ai/GeminiService.js';
 import { getFallbackService } from './ai/FallbackService.js';
 import { normaliseLanguage }  from './LanguageNormalizer.js';
 
-// NOTE: GPT & Claude HTTP calls are sketched as stubs; wire in your keys/endpoints.
-
-async function callGPT(prompt, opts = {}) {
-  const key = import.meta.env.VITE_OPENAI_API_KEY;
-  const baseUrl = import.meta.env.VITE_OPENAI_API_BASE || 'https://api.openai.com/v1/chat/completions';
-  if (!key) throw new Error('gpt_missing');
-  const body = {
-    model: import.meta.env.VITE_OPENAI_MODEL || 'gpt-4.1-mini',
-    messages: [{ role: 'user', content: prompt }],
-    max_tokens: Math.min(opts.maxTokens || 256, 512),
-  };
-  const res = await fetch(baseUrl, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${key}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) throw new Error(`gpt_${res.status}`);
-  const json = await res.json();
-  const text = json.choices?.[0]?.message?.content || '';
-  return { text, source: 'gpt' };
+async function callGPT(_prompt, _opts = {}) {
+  throw new Error('gpt_server_proxy_unavailable');
 }
 
-async function callClaude(prompt, opts = {}) {
-  const key = import.meta.env.VITE_CLAUDE_API_KEY;
-  const baseUrl = import.meta.env.VITE_CLAUDE_API_BASE || 'https://api.anthropic.com/v1/messages';
-  if (!key) throw new Error('claude_missing');
-  const body = {
-    model: import.meta.env.VITE_CLAUDE_MODEL || 'claude-3-5-sonnet-latest',
-    max_tokens: Math.min(opts.maxTokens || 256, 512),
-    messages: [{ role: 'user', content: prompt }],
-  };
-  const res = await fetch(baseUrl, {
-    method: 'POST',
-    headers: {
-      'x-api-key': key,
-      'anthropic-version': '2023-06-01',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) throw new Error(`claude_${res.status}`);
-  const json = await res.json();
-  const text = json.content?.[0]?.text || '';
-  return { text, source: 'claude' };
+async function callClaude(_prompt, _opts = {}) {
+  throw new Error('claude_server_proxy_unavailable');
 }
 
 function classifyIntent(text, ctx) {
@@ -83,7 +40,6 @@ export async function routeAI(message, ctx, options = {}) {
   const intent = classifyIntent(input, ctx);
   const cacheKey = `${intent}:${ctx?.hash || 'noctx'}:${input}`;
 
-  // Very small in-memory cache to avoid duplicate calls in-session.
   if (!routeAI._cache) routeAI._cache = new Map();
   if (routeAI._cache.has(cacheKey)) {
     return { text: routeAI._cache.get(cacheKey), source: 'cache' };
@@ -105,18 +61,16 @@ export async function routeAI(message, ctx, options = {}) {
     }
 
     if (intent === 'adherence') {
-      const enriched = `${ctx?.summary || ''}\n\nQuestion: ${input}`;
+      const enriched = `${ctx?.summary || ''}\\n\\nQuestion: ${input}`;
       const res = await callClaude(enriched, { maxTokens: 220 });
       routeAI._cache.set(cacheKey, res.text);
       return res;
     }
   } catch (e) {
-    console.warn('[AIProviderRouter] primary provider failed, falling back', e?.message || e);
+    console.warn('[AIProviderRouter] remote provider unavailable; using local fallback', e?.message || e);
   }
 
-  // Final safety net: local rules
   const fb = fallbackSvc.answer(message, ctx);
   routeAI._cache.set(cacheKey, fb.text);
   return fb;
 }
-
