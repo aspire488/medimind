@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 async function openLogin(page) {
-  await page.goto('/login');
+  // The splash route seeds the demo users before redirecting to login.
+  // Visiting /login directly skips that initialization and leaves the PINs unknown.
+  await page.goto('/');
+  await expect(page).toHaveURL(/\/login$/);
   await expect(page.getByText('Enter your PIN')).toBeVisible();
 }
 
