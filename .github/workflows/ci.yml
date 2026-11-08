@@ -23,7 +23,9 @@ jobs:
         run: npm ci
       - name: Production build
         run: npm run build
+      - name: Install Playwright test runner
+        run: npm install --no-save @playwright/test@1.57.0
       - name: Install Chromium for browser tests
-        run: npx --yes playwright@1.57.0 install --with-deps chromium
+        run: npx playwright install --with-deps chromium
       - name: Browser regression smoke suite
         run: npm run test:e2e
