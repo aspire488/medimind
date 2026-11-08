@@ -33,5 +33,6 @@ test('caregiver mode can enter the caregiver dashboard', async ({ page }) => {
   await openLogin(page);
   await page.getByRole('button', { name: /Priya \(Caregiver\)/ }).click();
   await expect(page).toHaveURL(/\/caregiver$/);
-  await expect(page.getByText('Priya Nair')).toBeVisible();
+  await expect(page.getByText('Patient Overview')).toBeVisible();
+  await expect(page.getByText('All patients')).toBeVisible();
 });
