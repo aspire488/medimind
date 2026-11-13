@@ -86,7 +86,7 @@ npm run build
 npm run test:e2e
 ```
 
-For local AI configuration, copy `.env.example` to `.env`. Never commit the resulting file.
+For local development, copy `.env.example` to `.env`. The public browser build uses mock/local fallback mode. Remote Gemini, OpenAI, and Anthropic calls are disabled until authenticated, rate-limited server-side endpoints are implemented. Never place provider credentials in `VITE_*` variables: Vite embeds them into browser assets.
 
 ## Security
 
